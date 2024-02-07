@@ -11,10 +11,15 @@ void enter(node *n,int val){
 }
 void print(node*n){ //accessing data using recursion
 
-    if(n->link==NULL) //base condition for tail node.
-        return;
+    if(n->link==NULL)
+    {printf("%d\n",n->info); 
+    return;} //base condition for tail node.
+       
+    
     printf("%d\n",n->info);
-    print(n->link);}
+    print(n->link);
+
+    }
 
 node* add(node*head,node*t_ptr,int ch){
     node*ptr=head;
@@ -25,7 +30,7 @@ node* add(node*head,node*t_ptr,int ch){
             }// going at end
             
         ptr->link=t_ptr;//changing last node link value to new node pointer
-        ptr->info=t_ptr->info;
+        
         return head;
         
     }
@@ -80,7 +85,7 @@ void main(){
         scanf("%d",&data);
         enter(t,data);
         
-        t->link=(node*)malloc(sizeof(node)); 
+        t->link=i!=4?(node*)malloc(sizeof(node)):NULL;
         t=t->link;
         }
         int ch;

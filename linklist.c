@@ -4,17 +4,22 @@ typedef struct node{
     int info;
     struct node *link;
 } node ;
-void enter(node *n,int val){
+// void enter(node *n,int val){
     
-    n->info=val;
-    n->link=NULL; //this will make tail's link = NULL
-}
+//     n->info=val;
+//     n->link=NULL; //this will make tail's link = NULL
+// }
 void print(node*n){ //accessing data using recursion
 
-    if(n->link==NULL) //base condition for tail node.
-        return;
+    if(n->link==NULL)
+    {printf("%d\n",n->info); 
+    return;} //base condition for tail node.
+       
+    
     printf("%d\n",n->info);
-    print(n->link);}
+    print(n->link);
+
+    }
 
 void main(){
     //we have to create at least a head which is denoted by n here.
@@ -25,7 +30,7 @@ void main(){
     int data ;
     printf("Enter Data %d: ",1);
     scanf("%d",&data);
-    enter(n,data);
+    n->info=data;
     t=(node*)malloc(sizeof(node));
     n->link=t;
     //above a head is created and it's next node(t) is also been created
@@ -34,9 +39,9 @@ void main(){
         
         printf("Enter Data %d: ",i+1);
         scanf("%d",&data);
-        enter(t,data);
+        t->info=data;
         
-        t->link=(node*)malloc(sizeof(node)); //temporary nodes are been created 
+        t->link=i!=4?(node*)malloc(sizeof(node)):NULL;  //temporary nodes are been created 
         t=t->link;
         }
 
