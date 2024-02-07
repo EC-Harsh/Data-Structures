@@ -16,13 +16,13 @@ node *sub(node *head,node *v_ptr,int ch){
     node *ptr=head;
     if(ch==1){
         head=head->link;
-        return head ;
+        return head ; //changing head pointer to second node
     }
     else if(ch==2){
-        while(ptr->link->link!=NULL){
+        while(ptr->link->link!=NULL){// this will take pointer to just before last value
             ptr=ptr->link;
         }
-        ptr->link=NULL;
+        ptr->link=NULL; //changing its link to NULL to make it a tail
         return head;
     }
     else if(ch==3){
@@ -37,12 +37,12 @@ node *sub(node *head,node *v_ptr,int ch){
             }
             ptr=ptr->link;
             }
-        ptr->link=ptr->link->link;
+        ptr->link=ptr->link->link;// changing the n-1th link value to n+1 address if n is node which we want to delete
         return head;
     }
     else{
         printf("Enter correct choice !!!\nNo node was deleted.\n");
-        return head;
+        return head; //Incorrect choice handling
         
     }
 }
