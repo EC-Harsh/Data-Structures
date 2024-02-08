@@ -3,7 +3,7 @@
 typedef struct node{
     int info;
     struct node *link;
-} node ;
+}node;
 void enter(node *n,int val){
     
     n->info=val;
