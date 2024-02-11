@@ -7,13 +7,13 @@ typedef struct node // doubly linklist node contains:
     int info;        // node's own data;
     struct node *nl; // next node's address
 } node;
-node *c_list(int n)
+node *c_list(int m)
 {
     node *head = (node *)malloc(sizeof(node)); // head node
     node *t_ptr = head;                        // create a pointer that iterates till last node
     node *prev_node;                           // create a node pointer that stores previous node address
     int i = 1;
-    while (n != 0)
+    while (m != 0)
     {
 
         if (i == 1) // for head/first node both previous and next node's address will be null
@@ -31,7 +31,7 @@ node *c_list(int n)
         }
         printf("Enter Data %d: ", i++);
         scanf("%d", &t_ptr->info); // node's data updated.
-        n--;
+        m--;
     }
     return head;
 }
@@ -93,31 +93,87 @@ node *del(node *head, int n, int m)
 
     // returning head because we can acess any value using head;
 }
+node * a_list(node*head,int pos,int m){
+    
+    node *ptr =head;
+    int c=0;
+    
+    node *tptr=(node*)malloc(sizeof(node));
+    printf("Enter DATA: ");
+    scanf("%d",&tptr->info);
+    if(pos==1){
+        ptr->pl=tptr;
+        tptr->nl=ptr;
+        tptr->pl=NULL;
+        head=tptr;
+    return head;}
+
+    while(ptr->nl!=NULL){
+        c++;
+        if(c==pos-1){
+            break;
+        }
+        ptr=ptr->nl;
+    }
+    if(pos!=m){
+        
+        ptr->nl->pl=tptr;
+        tptr->nl=ptr->nl;
+        tptr->pl=ptr;
+        ptr->nl=tptr;
+        return head;
+    }
+    if(pos==m)
+    {
+        ptr->nl=tptr;
+        tptr->pl=ptr;
+        return head;
+    }
+    
+    
+
+}
 
 int main()
 {
-    int n;
+    int s;
     char ch;
+    int pos;
     printf("Enter list length: "); // asking list's length
-    scanf("%d", &n);
-    node *h = c_list(n);
+    scanf("%d", &s);
+    node *h = c_list(s);
+    printf("%d\n\n",s);
 
     print(h);
     printf("Reverse of the list: \n"); // printing reverse of the list.
     rprint(h);
+    printf("%d\n\n",s);
 
     printf("\nIf you want to delete any node enter[y/n]: ");
     scanf("%s", &ch);
     if (ch == 'y' || ch == 'Y')
     {
-        int pos;
+        
         printf("Enter Position: ");
         scanf("%d", &pos);
-        h = del(h, pos, n);
+        h = del(h, pos, s);
         print(h);
         printf("Reverse of the list: \n");
         rprint(h);
+
     }
+     printf("If you want to insert a node enter[y/n]: ");
+     scanf("%s",&ch);
+     if(ch=='Y'|| ch=='y'){
+        printf("Enter Position: ");
+        scanf("%d", &pos);
+        printf("%d\n\n",s);
+        h=a_list(h,pos,s);
+        print(h);
+        printf("Reverse of the list: \n");
+        rprint(h);
+        
+     }
 
     printf("\nDONE! \n");
 
