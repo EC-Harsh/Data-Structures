@@ -33,6 +33,8 @@ node *c_list(int m)
         scanf("%d", &t_ptr->info); // node's data updated.
         m--;
     }
+    free(t_ptr);
+    free(prev_node);
     return head;
 }
 
