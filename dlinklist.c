@@ -87,7 +87,7 @@ node *del(node *head, int n, int m)
     }
     else // when user wants to delete last node
     {
-        tptr->nl == NULL; // we just have to change (n-1)th node's next link to NULL
+        tptr->nl = NULL; // we just have to change (n-1)th node's next link to NULL
         return head;
     }
 
