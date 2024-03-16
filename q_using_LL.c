@@ -8,47 +8,34 @@ typedef struct node{
 
 typedef struct queue{
     int size;
-    node * r;
-    node *f;
+    node * r; //rear
+    node *f; // front
 } queue;
-node * c_queue(int n){
-    node *head=(node*)malloc(sizeof(node));
-    node *ptr=head;    
-    int i=1;
-    while(n!=0){
-        if(i==1){
-            head->nl=NULL;
-        }
-        else{
-            ptr->nl=(node*)malloc(sizeof(node));
-            ptr=ptr->nl;
-        }
-        i++;
-        n--;
-        
-    }
-    ptr->nl=NULL;
-    return head;
-}
+
 
 void enqueue(queue *q){
-    if(q->r!=NULL){
-        printf("Enter Element: ");
-        scanf("%d",&q->r->info);
-        q->r=q->r->nl;
-        return ;
-    }
-    printf("Queue Is FULL Can't ADD !!\n");
+    q->r->nl=(node*)malloc(sizeof(node)); // create a new node
+    q->r=q->r->nl; // change rear to that node
+    printf("Enter Data : ");
+    scanf("%d",&q->r->info); // take user input that node
+    
 }
 void dequeue(queue *q){
-    if(q->r==q->f){
-        printf("Queue is empty can't Delete");
+    if(q->f==NULL){
+        printf("Queue is empty can't Delete\n"); // if f==NULL the queue is empty we cant delete anything from it
+        
         return ;
     }
+    node *ptr=q->f;
     q->f=q->f->nl;
+    free(ptr);
 }
 void print(queue* q){
     node *ptr=q->f;
+    if(ptr==NULL){
+    printf("Empty Set!! \n");
+    	return ;}
+    
     while(ptr!=NULL){
         printf("%d ",ptr->info);
         ptr=ptr->nl;
@@ -58,11 +45,18 @@ void print(queue* q){
 }
 
 void main(void){
-    int size;
-    printf("Enter Size of the Queue you want to create: ");
-    scanf("%d",&size);
+        
     queue *q1=(queue*)malloc(sizeof(queue));
-    q1->r=q1->f=c_queue(size);
+    
+    q1->r=(node *)malloc(sizeof(node));
+    
+    q1->f=q1->r; // for first time both front and rear are same.
+    
+    
+    printf("Enter Data For First value: ");
+    scanf("%d",&q1->r->info); // user input for first element .
+    
+    
     while(1){
         int ch;
         printf("\n1.Enqueue.\n2.Dequeue\n3.Print Queue\n4.Exit\n");
